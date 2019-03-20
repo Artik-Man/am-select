@@ -1,0 +1,68 @@
+.app-select {
+  display: inline-block;
+  font-size: 16px;
+  position: relative;
+  cursor: pointer;
+  .app-select__selected {
+    display: block;
+    width: 100%;
+    min-width: 160px;
+    border: 1px solid black;
+    background: white;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: inherit;
+    min-height: 18px;
+    position: relative;
+    z-index: 101;
+    .placeholder {
+      opacity: .5;
+    }
+  }
+  .app-select__options {
+    margin-top: 4px;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px 0 fade(black, 50%);
+    overflow: auto;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 100;
+      cursor: default;
+    }
+    .app-select__options__option {
+      display: block;
+      position: relative;
+      cursor: pointer;
+      z-index: 101;
+      background: white;
+      &:hover {
+        .title {
+          background-color: lightblue;
+        }
+      }
+      input:checked+.title {
+        background-color: lightblue;
+      }
+      input:disabled+.title {
+        background-color: lightgray;
+        color: grey;
+      }
+      .title {
+        display: block;
+        padding: 4px 8px;
+        font-size: inherit;
+        &.none {
+          opacity: .5;
+        }
+      }
+    }
+  }
+}
