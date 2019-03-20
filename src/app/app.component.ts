@@ -72,13 +72,13 @@ export class AppComponent {
     const brand = words.shift();
     if (!brand) { return; }
     const foundBrand = this.brands.find(b => b.title.toLowerCase().indexOf(brand) === 0);
-    if (!foundBrand) { return; }
+    if (!foundBrand || foundBrand.isDisabled) { return; }
     this.selectedBrand = foundBrand;
 
     const model = words.shift();
     if (!model) { return; }
     const foundModel = this.selectedBrand.value.find(b => b.title.toLowerCase().indexOf(model) === 0);
-    if (!foundModel) { return; }
+    if (!foundModel || foundModel.isDisabled) { return; }
     this.selectedModel = foundModel;
 
     const gen = words.shift();
@@ -94,7 +94,7 @@ export class AppComponent {
         }
       }
     }
-    if (!foundYears || !foundGen) { return; }
+    if (!foundYears || !foundGen || foundYears.isDisabled || foundGen.isDisabled) { return; }
     this.selectedYear = foundYears;
     this.selectedGen = foundGen;
     this.updateAutoName();
