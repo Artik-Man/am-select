@@ -1,4 +1,4 @@
-<div class="app-select">
+<div class="app-select" [ngClass]="{'disabled':disabled, 'open':open}">
     <div class="app-select__selected" (click)="openOptions()">
         <span class="placeholder" *ngIf="!selected.length">{{placeholder}}</span>
         <span *ngFor="let item of selected">{{item.title}}</span>

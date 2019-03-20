@@ -8,24 +8,53 @@ import { ApiService } from './services/api';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  public title = 'am-select';
   public brands: Option[] = [];
-  public selectedBrand: Option[] = [];
+
+  public selectedBrands: Option[] = [];
+  public selectedBrand: Option = null;
+
+  public selectedModels: Option[] = [];
+  public selectedModel: Option = null;
+
   constructor(private api: ApiService) {
     console.log(this);
 
+    const yearsToOptions = (years: { [year: string]: string[] }): Option[] => {
+      return Object.keys(years).map(year => ({
+        title: year,
+        isDisabled: Math.random() < 0.2,
+        value: years[year].map(gen => (
+          {
+            title: gen,
+            isDisabled: Math.random() < 0.2,
+            value: gen
+          }
+        ))
+      }));
+    };
+
     this.api.getBrands().then(brands => {
       this.brands = brands.map(brand => ({
-        value: brand.models,
         title: brand.brand,
-        isDisabled: Math.random() < 0.2
+        isDisabled: Math.random() < 0.2,
+        value: brand.models.map(model => ({
+          title: model.name,
+          isDisabled: Math.random() < 0.2,
+          value: yearsToOptions(model.years)
+        }))
       }));
     });
   }
 
   public changeBrand() {
-    // this.selectedBrand
+    this.selectedBrand = this.selectedBrands[0] || null;
+    this.selectedModels = [];
+    this.selectedModel = null;
     console.log(this.selectedBrand);
+  }
 
+  public changeModel() {
+    this.selectedModel = this.selectedModels[0] || null;
+    console.log(this.selectedModel);
   }
 }

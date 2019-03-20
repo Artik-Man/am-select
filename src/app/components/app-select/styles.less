@@ -3,6 +3,23 @@
   font-size: 16px;
   position: relative;
   cursor: pointer;
+  &.disabled {
+    opacity: .5;
+    cursor: default;
+  }
+  &.open {
+    .app-select__selected {
+      z-index: 101;
+    }
+    .app-select__options {
+      .overlay {
+        display: block;
+      }
+      .app-select__options__option {
+        z-index: 101;
+      }
+    }
+  }
   .app-select__selected {
     display: block;
     width: 100%;
@@ -14,7 +31,6 @@
     font-size: inherit;
     min-height: 18px;
     position: relative;
-    z-index: 101;
     .placeholder {
       opacity: .5;
     }
@@ -29,6 +45,7 @@
     top: 100%;
     left: 0;
     .overlay {
+      display: none;
       position: fixed;
       top: 0;
       left: 0;
@@ -41,7 +58,6 @@
       display: block;
       position: relative;
       cursor: pointer;
-      z-index: 101;
       background: white;
       &:hover {
         .title {

@@ -1,4 +1,16 @@
 <section class="content">
   <h1>Search car</h1>
-  <app-select [options]="brands" [(ngModel)]="selectedBrand" placeholder="Brand" (change)="changeBrand()"></app-select>
+  <p>
+    <app-select [options]="brands" [(ngModel)]="selectedBrands" placeholder="Brand" (change)="changeBrand()"
+      [disabled]="!brands.length"></app-select>
+  </p>
+  <p>
+    <app-select [options]="selectedBrand ? selectedBrand.value : null" [(ngModel)]="selectedModels" placeholder="Model"
+      (change)="changeModel()" [disabled]="!selectedBrand"></app-select>
+  </p>
+
+  <!-- <p>
+    <app-select [options]="selectedBrand ? selectedBrand.value : null" [(ngModel)]="selectedModels" placeholder="Model"
+      (change)="changeModel()" [disabled]="!selectedBrand"></app-select>
+  </p> -->
 </section>
