@@ -4,7 +4,7 @@
   position: relative;
   cursor: pointer;
   width: 100%;
-  min-width: 160px;
+  min-width: 250px;
   &.disabled {
     opacity: .5;
     cursor: default;
@@ -35,7 +35,9 @@
     display: block;
     width: 100%;
     border: 1px solid black;
-    background: white;
+    background: white data-uri('angle-down.svg') no-repeat;
+    background-size: 10px;
+    background-position: 95% 50%;
     border-radius: 4px;
     font-size: inherit;
     position: relative;

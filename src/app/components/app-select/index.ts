@@ -80,7 +80,11 @@ export class AppSelectComponent implements ControlValueAccessor {
 
     public writeValue(options: Option[]): void {
         if (!Array.isArray(options)) {
-            options = [];
+            if (options !== null && options !== undefined) {
+                options = [].concat(options);
+            } else {
+                options = [];
+            }
         }
         this.uncheckAll();
         if (Array.isArray(options)) {

@@ -2,6 +2,9 @@
   <h1>Search car</h1>
 
   <div class="search-car">
+
+    <input type="text" [(ngModel)]="fullAutoName" class="full-name" (keyup)="writeName()">
+
     <app-select [options]="brands" [disabled]="!brands.length" [(ngModel)]="selectedBrand" placeholder="Brand"
       (change)="changeBrand()"></app-select>
 
@@ -12,6 +15,6 @@
       [(ngModel)]="selectedYear" placeholder="Years" (change)="changeYear()"></app-select>
 
     <app-select [options]="selectedYear && selectedYear.value || []" [disabled]="!selectedYear"
-      [(ngModel)]="selectedGens" placeholder="Generation" (change)="changeGen()"></app-select>
+      [(ngModel)]="selectedGen" placeholder="Generation" (change)="changeGen()"></app-select>
   </div>
 </section>

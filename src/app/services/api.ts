@@ -4,22 +4,22 @@ import { Injectable } from '@angular/core';
 export class ApiService {
     private models = {
         '2015 - 2016': [
-            'Gen I',
-            'Gen II',
-            'Gen III',
-            'Gen IV',
+            'Gen.I',
+            'Gen.II',
+            'Gen.III',
+            'Gen.IV',
         ],
         '2016 - 2017': [
-            'Gen I',
-            'Gen II',
-            'Gen III'
+            'Gen.I',
+            'Gen.II',
+            'Gen.III'
         ],
         '2017 - 2018': [
-            'Gen I',
-            'Gen II'
+            'Gen.I',
+            'Gen.II'
         ],
         '2018 - 2019': [
-            'Gen I'
+            'Gen.I'
         ],
     };
 
