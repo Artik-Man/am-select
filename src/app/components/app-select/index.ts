@@ -25,11 +25,11 @@ export class AppSelectComponent implements ControlValueAccessor {
     public optionsName: string;
     public open = false;
 
-    get value(): Option[] {
-        return this.selected;
+    get value(): Option[] | Option {
+        return this.getValue();
     }
 
-    private onChange: (value: Option[]) => void = null;
+    private onChange: (value: Option[] | Option) => void = null;
     private onTouched: () => void = null;
 
     constructor() {
@@ -54,20 +54,24 @@ export class AppSelectComponent implements ControlValueAccessor {
                 this.uncheckAll();
             }
             option.checked = (event.target as HTMLInputElement).checked;
-            this.selected = this.getChecked();
+            this.selected = this.options.filter(o => !!o.checked);
         }
-        this.writeValue(this.selected);
-        if (!this.multiselect) {
+        if (this.multiselect) {
+        } else {
             this.open = false;
         }
+        this.writeValue(this.selected);
     }
 
     private uncheckAll() {
         this.options.forEach(o => o.checked = false);
     }
 
-    private getChecked() {
-        return this.options.filter(o => !!o.checked);
+    private getValue(): Option[] | Option {
+        if (!this.multiselect) {
+            return this.selected[0] || null;
+        }
+        return this.selected;
     }
 
     // --------------------------------------
@@ -75,15 +79,20 @@ export class AppSelectComponent implements ControlValueAccessor {
     // --------------------------------------
 
     public writeValue(options: Option[]): void {
-        if (options === null || options === undefined) {
+        if (!Array.isArray(options)) {
             options = [];
         }
         this.uncheckAll();
-        options.forEach(o => {
-            o.checked = true;
-        })
-        this.selected = options;
-        this.onChange && this.onChange(this.selected);
+        if (Array.isArray(options)) {
+            options.forEach(o => {
+                o.checked = true;
+            });
+            this.selected = options;
+        } else {
+            this.selected = [options];
+        }
+        const value = this.getValue();
+        this.onChange && this.onChange(value);
         this.onTouched && this.onTouched();
     }
 

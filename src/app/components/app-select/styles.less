@@ -1,8 +1,9 @@
 .app-select {
-  display: inline-block;
+  display: block;
   font-size: 16px;
   position: relative;
   cursor: pointer;
+  width: 100%;
   min-width: 160px;
   &.disabled {
     opacity: .5;
@@ -70,7 +71,6 @@
     .app-select__options__option {
       display: block;
       position: relative;
-      cursor: pointer;
       background: white;
       &:hover {
         .title {
@@ -83,8 +83,10 @@
       input:disabled+.title {
         background-color: lightgray;
         color: grey;
+        cursor: default;
       }
       .title {
+        cursor: pointer;
         display: block;
         padding: 4px 8px;
         font-size: inherit;

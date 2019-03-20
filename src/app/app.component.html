@@ -2,16 +2,16 @@
   <h1>Search car</h1>
 
   <div class="search-car">
-    <app-select [options]="brands" [disabled]="!brands.length" [(ngModel)]="selectedBrands" placeholder="Brand"
+    <app-select [options]="brands" [disabled]="!brands.length" [(ngModel)]="selectedBrand" placeholder="Brand"
       (change)="changeBrand()"></app-select>
 
-    <app-select [options]="selectedBrand ? selectedBrand.value : []" [disabled]="!selectedBrand"
-      [(ngModel)]="selectedModels" placeholder="Model" (change)="changeModel()"></app-select>
+    <app-select [options]="selectedBrand && selectedBrand.value || []" [disabled]="!selectedBrand"
+      [(ngModel)]="selectedModel" placeholder="Model" (change)="changeModel()"></app-select>
 
-    <app-select [options]="selectedModel ? selectedModel.value : []" [disabled]="!selectedModel"
-      [(ngModel)]="selectedYears" placeholder="Years" (change)="changeYear()"></app-select>
+    <app-select [options]="selectedModel && selectedModel.value || []" [disabled]="!selectedModel"
+      [(ngModel)]="selectedYear" placeholder="Years" (change)="changeYear()"></app-select>
 
-    <app-select [options]="selectedYear ? selectedYear.value : []" [disabled]="!selectedYear" [(ngModel)]="selectedGens"
-      placeholder="Generation" (change)="changeGen()" [multiselect]="true"></app-select>
+    <app-select [options]="selectedYear && selectedYear.value || []" [disabled]="!selectedYear"
+      [(ngModel)]="selectedGens" placeholder="Generation" (change)="changeGen()"></app-select>
   </div>
 </section>

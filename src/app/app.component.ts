@@ -10,16 +10,9 @@ import { ApiService } from './services/api';
 export class AppComponent {
   public brands: Option[] = [];
 
-  public selectedBrands: Option[] = [];
   public selectedBrand: Option = null;
-
-  public selectedModels: Option[] = [];
   public selectedModel: Option = null;
-
-  public selectedYears: Option[] = [];
   public selectedYear: Option = null;
-
-  public selectedGens: Option[] = [];
   public selectedGen: Option = null;
 
   constructor(private api: ApiService) {
@@ -53,24 +46,20 @@ export class AppComponent {
   }
 
   public changeBrand() {
-    this.selectedBrand = this.selectedBrands[0] || null;
-    this.selectedModels = [];
+    this.selectedModel = null;
     this.changeModel();
   }
 
   public changeModel() {
-    this.selectedModel = this.selectedModels[0] || null;
-    this.selectedYears = [];
+    this.selectedYear = null;
     this.changeYear();
   }
 
   public changeYear() {
-    this.selectedYear = this.selectedYears[0] || null;
-    this.selectedGens = [];
+    this.selectedGen = null;
     this.changeGen();
   }
 
   public changeGen() {
-    this.selectedGen = this.selectedGens[0] || null;
   }
 }
