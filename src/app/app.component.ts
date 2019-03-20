@@ -16,6 +16,12 @@ export class AppComponent {
   public selectedModels: Option[] = [];
   public selectedModel: Option = null;
 
+  public selectedYears: Option[] = [];
+  public selectedYear: Option = null;
+
+  public selectedGens: Option[] = [];
+  public selectedGen: Option = null;
+
   constructor(private api: ApiService) {
     console.log(this);
 
@@ -49,12 +55,22 @@ export class AppComponent {
   public changeBrand() {
     this.selectedBrand = this.selectedBrands[0] || null;
     this.selectedModels = [];
-    this.selectedModel = null;
-    console.log(this.selectedBrand);
+    this.changeModel();
   }
 
   public changeModel() {
     this.selectedModel = this.selectedModels[0] || null;
-    console.log(this.selectedModel);
+    this.selectedYears = [];
+    this.changeYear();
+  }
+
+  public changeYear() {
+    this.selectedYear = this.selectedYears[0] || null;
+    this.selectedGens = [];
+    this.changeGen();
+  }
+
+  public changeGen() {
+    this.selectedGen = this.selectedGens[0] || null;
   }
 }

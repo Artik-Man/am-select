@@ -29,7 +29,6 @@ export class AppSelectComponent implements ControlValueAccessor {
         return this.selected;
     }
 
-
     private onChange: (value: Option[]) => void = null;
     private onTouched: () => void = null;
 
@@ -51,21 +50,24 @@ export class AppSelectComponent implements ControlValueAccessor {
         if (!option) {
             this.selected = [];
         } else {
-            const checked = (event.target as HTMLInputElement).checked;
-            if (checked && this.multiselect) {
-                this.selected.push(option);
-            } else if (checked) {
-                this.selected = [option];
-            } else if (this.multiselect) {
-                this.selected = remove(this.selected, option);
-            } else {
-                this.selected = [];
+            if (!this.multiselect) {
+                this.uncheckAll();
             }
+            option.checked = (event.target as HTMLInputElement).checked;
+            this.selected = this.getChecked();
         }
         this.writeValue(this.selected);
         if (!this.multiselect) {
             this.open = false;
         }
+    }
+
+    private uncheckAll() {
+        this.options.forEach(o => o.checked = false);
+    }
+
+    private getChecked() {
+        return this.options.filter(o => !!o.checked);
     }
 
     // --------------------------------------
@@ -74,8 +76,13 @@ export class AppSelectComponent implements ControlValueAccessor {
 
     public writeValue(options: Option[]): void {
         if (options === null || options === undefined) {
-            return;
+            options = [];
         }
+        this.uncheckAll();
+        options.forEach(o => {
+            o.checked = true;
+        })
+        this.selected = options;
         this.onChange && this.onChange(this.selected);
         this.onTouched && this.onTouched();
     }
@@ -97,4 +104,5 @@ export interface Option {
     value: any;
     title: string;
     isDisabled?: boolean;
+    checked?: boolean;
 }

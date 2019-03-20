@@ -1,16 +1,17 @@
 <section class="content">
   <h1>Search car</h1>
-  <p>
-    <app-select [options]="brands" [(ngModel)]="selectedBrands" placeholder="Brand" (change)="changeBrand()"
-      [disabled]="!brands.length"></app-select>
-  </p>
-  <p>
-    <app-select [options]="selectedBrand ? selectedBrand.value : null" [(ngModel)]="selectedModels" placeholder="Model"
-      (change)="changeModel()" [disabled]="!selectedBrand"></app-select>
-  </p>
 
-  <!-- <p>
-    <app-select [options]="selectedBrand ? selectedBrand.value : null" [(ngModel)]="selectedModels" placeholder="Model"
-      (change)="changeModel()" [disabled]="!selectedBrand"></app-select>
-  </p> -->
+  <div class="search-car">
+    <app-select [options]="brands" [disabled]="!brands.length" [(ngModel)]="selectedBrands" placeholder="Brand"
+      (change)="changeBrand()"></app-select>
+
+    <app-select [options]="selectedBrand ? selectedBrand.value : []" [disabled]="!selectedBrand"
+      [(ngModel)]="selectedModels" placeholder="Model" (change)="changeModel()"></app-select>
+
+    <app-select [options]="selectedModel ? selectedModel.value : []" [disabled]="!selectedModel"
+      [(ngModel)]="selectedYears" placeholder="Years" (change)="changeYear()"></app-select>
+
+    <app-select [options]="selectedYear ? selectedYear.value : []" [disabled]="!selectedYear" [(ngModel)]="selectedGens"
+      placeholder="Generation" (change)="changeGen()" [multiselect]="true"></app-select>
+  </div>
 </section>

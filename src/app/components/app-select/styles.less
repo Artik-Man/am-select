@@ -3,9 +3,19 @@
   font-size: 16px;
   position: relative;
   cursor: pointer;
+  min-width: 160px;
   &.disabled {
     opacity: .5;
     cursor: default;
+  }
+  &.multiselect {
+    .app-select__selected {
+      .selected {
+        display: inline-block;
+        margin-right: 2px;
+        background: lightblue;
+      }
+    }
   }
   &.open {
     .app-select__selected {
@@ -23,16 +33,19 @@
   .app-select__selected {
     display: block;
     width: 100%;
-    min-width: 160px;
     border: 1px solid black;
     background: white;
     border-radius: 4px;
-    padding: 4px 8px;
     font-size: inherit;
-    min-height: 18px;
     position: relative;
     .placeholder {
       opacity: .5;
+      padding: 4px 8px;
+      display: inline-block;
+    }
+    .selected {
+      display: block;
+      padding: 4px 8px;
     }
   }
   .app-select__options {
