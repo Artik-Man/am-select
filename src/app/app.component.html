@@ -1,4 +1,4 @@
 <section class="content">
   <h1>Search car</h1>
-  <app-select [options]="brands" [(ngModel)]="selectedBrand" placeholder="Brand"></app-select>
+  <app-select [options]="brands" [(ngModel)]="selectedBrand" placeholder="Brand" (change)="changeBrand()"></app-select>
 </section>

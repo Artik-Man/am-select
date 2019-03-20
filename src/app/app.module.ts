@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { } from '@angular/material';
 import { AppSelectComponent } from './components/app-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ApiService } from './services/api';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    ApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

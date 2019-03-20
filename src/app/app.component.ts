@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Option } from './components/app-select';
+import { ApiService } from './services/api';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +11,21 @@ export class AppComponent {
   public title = 'am-select';
   public brands: Option[] = [];
   public selectedBrand: Option[] = [];
-  constructor() {
+  constructor(private api: ApiService) {
     console.log(this);
-    this.brands = ['Tesla', 'Audi', 'Lamborghini', 'Toyota', 'BMW', 'Volkswagen'].sort()
-      .map(item => ({
-        value: {},
-        title: item,
+
+    this.api.getBrands().then(brands => {
+      this.brands = brands.map(brand => ({
+        value: brand.models,
+        title: brand.brand,
         isDisabled: Math.random() < 0.2
       }));
+    });
+  }
+
+  public changeBrand() {
+    // this.selectedBrand
+    console.log(this.selectedBrand);
+
   }
 }
