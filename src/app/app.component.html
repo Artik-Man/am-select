@@ -1,20 +1,19 @@
 <section class="content">
   <h1>Search car</h1>
 
-  <div class="search-car">
+  <form class="search-car" [formGroup]="form">
 
-    <input type="text" [(ngModel)]="fullAutoName" class="full-name" (keyup)="writeName()">
+    <input type="text" formControlName="fullAutoName" class="full-name">
 
-    <app-select [options]="brands" [disabled]="!brands.length" [(ngModel)]="selectedBrand" placeholder="Brand"
-      (change)="changeBrand()"></app-select>
+    <app-select [options]="brands" formControlName="selectedBrand" placeholder="Brand"></app-select>
 
-    <app-select [options]="selectedBrand && selectedBrand.value || []" [disabled]="!selectedBrand"
-      [(ngModel)]="selectedModel" placeholder="Model" (change)="changeModel()"></app-select>
+    <app-select [options]="getOptions('selectedBrand')" formControlName="selectedModel" placeholder="Model">
+    </app-select>
 
-    <app-select [options]="selectedModel && selectedModel.value || []" [disabled]="!selectedModel"
-      [(ngModel)]="selectedYear" placeholder="Years" (change)="changeYear()"></app-select>
+    <app-select [options]="getOptions('selectedModel')" formControlName="selectedYear" placeholder="Years"></app-select>
 
-    <app-select [options]="selectedYear && selectedYear.value || []" [disabled]="!selectedYear"
-      [(ngModel)]="selectedGen" placeholder="Generation" (change)="changeGen()"></app-select>
-  </div>
+    <app-select [options]="getOptions('selectedYear')" formControlName="selectedGen" placeholder="Generation">
+    </app-select>
+
+  </form>
 </section>
