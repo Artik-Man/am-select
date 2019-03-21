@@ -1,19 +1,20 @@
 <div class="app-select" [ngClass]="{'disabled':disabled, 'open':open, 'multiselect':multiselect}">
-    <div class="app-select__selected" (click)="openOptions()">
+    <div class="app-select__selected" tabindex="0" (click)="openOptions()" (keydown.enter)="openOptions()"
+        (keydown.space)="openOptions()">
         <span class="placeholder" *ngIf="!selected.length">{{placeholder}}</span>
         <span *ngFor="let item of selected" class="selected">{{item.title}}</span>
     </div>
     <div class="app-select__options" *ngIf="open">
         <div class="overlay" (click)="open=false"></div>
         <label class="app-select__options__option" *ngIf="!multiselect">
-            <input class="cdk-visually-hidden" [attr.type]="multiselect?'checkbox':'radio'" [attr.name]="optionsName"
-                value="" (change)="selectOption(null, $event)">
+            <input class="cdk-visually-hidden" tabindex="0" [attr.type]="multiselect?'checkbox':'radio'"
+                [attr.name]="optionsName" value="" (change)="selectOption(null, $event)">
             <span class="title none">None</span>
         </label>
         <label class="app-select__options__option" *ngFor="let option of options">
-            <input class="cdk-visually-hidden" [attr.type]="multiselect?'checkbox':'radio'" [attr.name]="optionsName"
-                [attr.value]="option.title" [attr.disabled]="option.isDisabled?'': null" [attr.checked]="option.checked?'': null"
-                (change)="selectOption(option, $event)">
+            <input class="cdk-visually-hidden" tabindex="0" [attr.type]="multiselect?'checkbox':'radio'"
+                [attr.name]="optionsName" [attr.value]="option.title" [attr.disabled]="option.isDisabled?'': null"
+                [attr.checked]="option.checked?'': null" (change)="selectOption(option, $event)">
             <span class="title">{{option.title}}</span>
         </label>
     </div>

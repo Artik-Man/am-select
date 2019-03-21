@@ -2,8 +2,10 @@
   <h1>Search car</h1>
 
   <form class="search-car" [formGroup]="form">
-
-    <input type="text" formControlName="fullAutoName" class="full-name">
+    <label class="full-name">
+      <input type="text" formControlName="fullAutoName" placeholder="Full name">
+      <span class="ripple"></span>
+    </label>
 
     <app-select [options]="brands" formControlName="selectedBrand" placeholder="Brand"></app-select>
 
