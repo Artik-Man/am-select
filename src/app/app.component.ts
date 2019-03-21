@@ -146,14 +146,14 @@ export class AppComponent {
 
     const brand = words.shift();
     if (!brand) { return; }
-    const foundBrand = this.brands.find(b => b.title.toLowerCase().indexOf(brand) === 0);
-    if (!foundBrand || foundBrand.isDisabled) { return; }
+    const foundBrand = this.brands.find(b => !b.isDisabled && b.title.toLowerCase().indexOf(brand) === 0);
+    if (!foundBrand) { return; }
     selectedBrand.setValue(foundBrand);
 
     const model = words.shift();
     if (!model) { return; }
-    const foundModel = selectedBrand.value.value.find(b => b.title.toLowerCase().indexOf(model) === 0);
-    if (!foundModel || foundModel.isDisabled) { return; }
+    const foundModel = selectedBrand.value.value.find(m => !m.isDisabled && m.title.toLowerCase().indexOf(model) === 0);
+    if (!foundModel) { return; }
     selectedModel.setValue(foundModel);
 
     const gen = words.shift();
@@ -161,15 +161,17 @@ export class AppComponent {
     let foundYears;
     let foundGen;
     for (const year of selectedModel.value.value) {
-      for (const generation of year.value) {
-        if (generation.title.toLowerCase().indexOf(gen) !== -1) {
-          foundYears = year;
-          foundGen = generation;
-          break;
+      if (!year.isDisabled) {
+        for (const generation of year.value) {
+          if (!generation.isDisabled && generation.title.toLowerCase().indexOf(gen) !== -1) {
+            foundYears = year;
+            foundGen = generation;
+            break;
+          }
         }
       }
     }
-    if (!foundYears || !foundGen || foundYears.isDisabled || foundGen.isDisabled) { return; }
+    if (!foundYears || !foundGen) { return; }
     selectedYear.setValue(foundYears);
     selectedGen.setValue(foundGen);
   }
