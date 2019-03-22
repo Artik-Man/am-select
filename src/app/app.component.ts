@@ -146,20 +146,20 @@ export class AppComponent {
 
     const brand = words.shift();
     if (!brand) { return; }
-    const foundBrand = this.brands.find(b => !b.isDisabled && b.title.toLowerCase().indexOf(brand) === 0);
-    if (!foundBrand) { return; }
+    const foundBrand = this.brands.find(b => !b.isDisabled && b.title.toLowerCase().indexOf(brand) === 0) || null;
     selectedBrand.setValue(foundBrand);
+    if (!foundBrand) { return; }
 
     const model = words.shift();
     if (!model) { return; }
-    const foundModel = selectedBrand.value.value.find(m => !m.isDisabled && m.title.toLowerCase().indexOf(model) === 0);
-    if (!foundModel) { return; }
+    const foundModel = selectedBrand.value.value.find(m => !m.isDisabled && m.title.toLowerCase().indexOf(model) === 0) || null;
     selectedModel.setValue(foundModel);
+    if (!foundModel) { return; }
 
     const gen = words.shift();
     if (!gen) { return; }
-    let foundYears;
-    let foundGen;
+    let foundYears = null;
+    let foundGen = null;
     for (const year of selectedModel.value.value) {
       if (!year.isDisabled) {
         for (const generation of year.value) {
@@ -171,7 +171,7 @@ export class AppComponent {
         }
       }
     }
-    if (!foundYears || !foundGen) { return; }
+
     selectedYear.setValue(foundYears);
     selectedGen.setValue(foundGen);
   }
